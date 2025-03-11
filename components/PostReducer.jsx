@@ -1,17 +1,19 @@
 import React from 'react'
 import { useState } from 'react'
-import { useReducer } from 'react'
-import { postReducer } from '../redux/postReducer'
+// import { useReducer } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+// import { postReducer } from '../redux/postReducer'
 import { add_post } from '../redux/actions'
 
-const initialState = []
 
 
 
 
 export const PostReducer = () => {
-    const [posts, dispatch] = useReducer(postReducer, initialState)
-    // console.log(posts, 'posts')
+    // const [posts, dispatch] = useReducer(postReducer, initialState)
+    const dispatch = useDispatch()
+    const posts = useSelector((state) => state)
+    console.log(posts, 'posts')
     const [title, setTitle] = useState('')
     const [comment, setComment] = useState('')
     
@@ -31,7 +33,7 @@ export const PostReducer = () => {
         </form>
 
         <div>
-            {posts.map((data) => (
+            {posts?.map((data) => (
                 <div key={data.id}>
                     {/* {console.log(data.post?.title)} */}
                     <p><strong>Title : { data.post?.title }</strong></p>
